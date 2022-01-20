@@ -1,0 +1,1 @@
+"#All-Art Gallery Serializator"
