@@ -1,0 +1,6 @@
+declare module "three-bmfont-text"
+declare module "troika-three-text"
+declare module "load-bmfont"
+declare module "three-bmfont-text/shaders/msdf"
+declare module "iconv-lite"
+declare module "*.less"

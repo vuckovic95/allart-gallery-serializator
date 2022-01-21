@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "./lib",
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "downlevelIteration": true
+    },
+    "include": [
+        "src",
+        "src/declarations.d.ts",
+        "fonts.d.ts"
+      ],
+    "exclude": ["node_modules", "**/__tests__/*"]
+  }
