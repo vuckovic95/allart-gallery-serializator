@@ -1,4 +1,4 @@
-import { parse, stringify } from "query-string"
+// import { parse, stringify } from "query-string"
 import axios, { AxiosError, ResponseType } from "axios"
 import { iDoc, iMeshJson } from "../definitions"
 import { gunzip, gunzipSync, InputType } from "zlib"
@@ -18,7 +18,7 @@ export function get<T>({ link, query, responseType }: iGetters): Promise<T> {
         params: query,
         responseType,
       })
-      .then((res) => {
+      .then((res : any) => {
         resolve(res.data)
       })
       .catch((err: AxiosError) => {
