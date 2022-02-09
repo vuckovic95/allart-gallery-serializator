@@ -33,6 +33,7 @@ import {
   iSceneLoaderProps,
   iQualityReduction,
   CubemapOrder,
+  iBoxCollider
 } from "../../definitions"
 import { LoadMesh } from "./LoadMesh"
 import { Text } from "troika-three-text"
@@ -437,6 +438,7 @@ export default class SceneLoader {
                 go.trans.scale.y,
                 go.trans.scale.z,
               )
+
               if (go.videoplayer.length > 0) {
                 if (materials) {
                   const video = this.CreateVideo(go, object, materials);

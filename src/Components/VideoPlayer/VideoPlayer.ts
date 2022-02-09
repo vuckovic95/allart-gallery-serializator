@@ -1,4 +1,9 @@
+import { SceneLoaderUtilities } from "allart-gallery-serializator/src/Loaders/SceneLoader/SceneLoaderUtilities"
 import * as THREE from "three"
+import { BoxGeometry, BoxHelper, MeshBasicMaterial, Object3D } from "three"
+import { Matrix4 } from "three"
+import { Mesh } from "three"
+import { Quaternion } from "three"
 
 export class VideoPlayer extends THREE.Object3D {
   videoName: string
@@ -11,6 +16,9 @@ export class VideoPlayer extends THREE.Object3D {
   playTexture: THREE.Object3D
   pauseTexture: THREE.Object3D
 
+  btnBox : THREE.BoxHelper
+  btnObject : THREE.Mesh
+
   video: HTMLVideoElement
   private isPlaying = false
   private loop = false
@@ -20,10 +28,11 @@ export class VideoPlayer extends THREE.Object3D {
   // tags
   private artPieceTag = "ArtPiece";
   private videoTag = "Video";
+  private videoBtnTag = "VideoBtn"
 
   // endpoints
-  private playCircleEndPoint = "/icons/pause-circle-regular.png";
-  private pauseCircleEndPoint = "/icons/play-circle-regular.png";
+  private playCircleEndPoint = "/icons/play-circle-regular.png";
+  private pauseCircleEndPoint = "/icons/pause-circle-regular.png";
 
   // plane
   private planeWidth = 0.2;
@@ -55,6 +64,9 @@ export class VideoPlayer extends THREE.Object3D {
     this.video.src = this.videoSrc
     this.video.muted = false
     this.video.crossOrigin = "anonymous"
+
+    this.btnBox = new THREE.BoxHelper( new THREE.Object3D, 0xffff00 );
+    this.btnObject = new THREE.Mesh
 
     const pauseIcons = new THREE.PlaneGeometry(this.planeWidth, this.planeHeight, this.planeWidthSegments)
     const pauseMat = new THREE.MeshLambertMaterial()
@@ -99,6 +111,7 @@ export class VideoPlayer extends THREE.Object3D {
 
     this.playTexture = playPlane
     this.pauseTexture = pausePlane
+
 
     this.playTexture.visible = false
     this.pauseTexture.visible = false
@@ -195,13 +208,66 @@ export class VideoPlayer extends THREE.Object3D {
       this.videoMesh.position.y + offset.y,
       this.videoMesh.position.z + offset.z,
     )
-    // console.log(object)
     current.quaternion.set(
       this.videoMesh.quaternion.x,
       this.videoMesh.quaternion.y,
       this.videoMesh.quaternion.z,
       this.videoMesh.quaternion.w,
     )
+    this.createBtnCollider(current)
+  }
+
+  createBtnCollider(object : Object3D){
+    const smallGeometry = new THREE.SphereBufferGeometry(object.scale.x / 3, object.scale.y / 3, object.scale.z / 3)
+    smallGeometry.scale(object.scale.x / 3, object.scale.y / 3, object.scale.z / 3)
+    const material = new MeshBasicMaterial({ color: 0xffff00 })
+    material.wireframe = true
+
+    const btnObject = new THREE.BoxGeometry(object.scale.x / 3, object.scale.y / 3, object.scale.z / 3)
+
+    const collider = new Mesh(smallGeometry, material)
+    collider.userData.tag = this.videoBtnTag
+
+    btnObject.applyMatrix4(
+      new Matrix4().makeTranslation(
+        object.position.x,
+        object.position.y,
+        object.position.z
+      ))
+    collider.visible = true
+    collider.layers.set(4)
+    collider.position.set(
+      object.position.x,
+      object.position.y,
+      object.position.z
+    )
+
+    collider.rotation.setFromQuaternion(
+      new Quaternion(
+        object.rotation.x,
+        object.rotation.y + 180,
+        object.rotation.z
+      ),
+    )
+
+    this.scene.add(collider)
+    collider.updateMatrix
+  }
+
+  setBtnColliderPosition(object : Object3D){
+    this.btnObject.position.set(
+      object.position.x,
+      object.position.y,
+      object.position.z
+    )
+
+    this.btnBox.position.set(
+      object.position.x,
+      object.position.y,
+      object.position.z
+    )
+    this.btnBox.update
+    console.log(this.btnBox.position)
   }
 
   onHoverExit() {

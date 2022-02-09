@@ -50,6 +50,7 @@ const vrAllArt_ArtifactRoot = "https://vrallart.com/embedded-artifact/";
 const artPieceTag = "ArtPiece";
 const videoTag = "Video";
 const outlineTag = "outline";
+const videoBtnTag = "videoBtn"
 
 export class SceneLoaderUtilities {
   static ApplyTexturesForMaterial(
@@ -506,13 +507,14 @@ export class SceneLoaderUtilities {
     exhibition.artPieces.forEach(function (e) {
       const sceneObject = scene?.getObjectByName(e._id)
       const col = scene?.getObjectByName("-collider-" + e._id)
+
       if (col) {
         col.userData.colTarget = sceneObject
         col.layers.set(3)
         col.userData.tag = artPieceTag
         if (e.shrType === "VIDEO") {
           col.userData.typetag = videoTag
-          col.userData.file = e.file
+          col.userData.file = e.file 
         }
 
         col.userData.url = e.shrUrl
