@@ -1,5 +1,5 @@
 import { Box3, PerspectiveCamera, Vector3 } from "three"
-interface iRepositionProps {
+export interface iRepositionProps {
   camera: PerspectiveCamera
   bounds: Vector3
 }

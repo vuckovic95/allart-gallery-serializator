@@ -7,11 +7,11 @@ import {
   WebGLRenderer,
 } from "three"
 
-interface iUseSceneProps {
+export interface iUseSceneProps {
   container: RefObject<HTMLDivElement>
 }
 
-interface iUseSceneReturn {
+export interface iUseSceneReturn {
   scene: Scene
   renderer: WebGLRenderer
 }

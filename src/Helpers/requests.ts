@@ -5,7 +5,7 @@ import { gunzip, gunzipSync, InputType } from "zlib"
 import { unzipFile } from "./functions"
 import { CONTENT_URL } from "../api/Definitions"
 
-interface iGetters {
+export interface iGetters {
   link: string
   query?: unknown
   responseType?: ResponseType
@@ -28,7 +28,7 @@ export function get<T>({ link, query, responseType }: iGetters): Promise<T> {
   })
 }
 
-interface iGetMeshResult {
+export interface iGetMeshResult {
   doc: iDoc
   json: iMeshJson
 }
