@@ -1,2 +1,8 @@
-node_modules
-/lib
+node_modules/
+build/
+package-lock.json
+*.swp
+*.swo
+.env
+lib/
+keys

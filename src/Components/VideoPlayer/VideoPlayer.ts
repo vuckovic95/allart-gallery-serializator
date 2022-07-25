@@ -1,4 +1,4 @@
-import { SceneLoaderUtilities } from "allart-gallery-serializator/src/Loaders/SceneLoader/SceneLoaderUtilities"
+//import { SceneLoaderUtilities } from "allart-gallery-serializator/src/Loaders/SceneLoader/SceneLoaderUtilities"
 import * as THREE from "three"
 import { BoxGeometry, BoxHelper, MeshBasicMaterial, Object3D } from "three"
 import { Matrix4 } from "three"
@@ -52,7 +52,7 @@ export class VideoPlayer extends THREE.Object3D {
 
     const nameParse = videoName.split("/")
     this.setFirstFrame = setFirstFrame
-    this.name = nameParse[nameParse.length - 1].split(".")[0]
+    //this.name = nameParse[nameParse.length - 1].split(".")[0]
     this.videoName = videoName
     this.videoSrc = videoSrc
     this.videoId = videoId
@@ -81,7 +81,7 @@ export class VideoPlayer extends THREE.Object3D {
       // resource URL
       window.location.origin + this.pauseCircleEndPoint,
       // called when the resource is loaded
-       (data) => {
+       (data : any) => {
         pauseMat.transparent = true
         pauseMat.depthWrite = false
         pauseMat.side = THREE.DoubleSide
@@ -97,7 +97,7 @@ export class VideoPlayer extends THREE.Object3D {
       // resource URL
       window.location.origin + this.playCircleEndPoint,
       // called when the resource is loaded
-      (data) => {
+      (data : any) => {
         playMat.transparent = true
         playMat.depthWrite = false
         playMat.side = THREE.DoubleSide

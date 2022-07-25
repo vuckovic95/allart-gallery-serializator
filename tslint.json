@@ -1,3 +1,17 @@
 {
-	"extends": ["tslint:recommended", "tslint-config-prettier"]
+	"extends": ["tslint:recommended", "tslint-config-prettier"],
+	"rules": {
+		"no-console": [true, "warning"],
+		"class-name": [false, "warning"],
+		"prefer-for-of": [false, "warning"],
+		"no-unused-expression": [false, "warning"],
+		"variable-name": [false],
+		"no-shadowed-variable": [false],
+		"comment-format": [false],
+		"no-string-literal": [false],
+		"prefer-const": [false],
+		"max-classes-per-file": [false],
+		"ban-types": [false],
+		"only-arrow-functions": [false]
+	}
 }
